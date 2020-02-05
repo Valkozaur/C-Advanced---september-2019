@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _1._Basic_Stack_Operations
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var restrains = Console.ReadLine()
+                .Split(' ')
+                .Select(int.Parse)
+                .ToArray();
+
+            var elementsToPush = restrains[0];
+            var elementsToPop = restrains[1];
+            var elementToLookFor = restrains[2];
+
+            if (elementsToPush == elementsToPop)
+            {
+                Console.WriteLine("0");
+                return;
+            }
+
+            var stackInput = Console.ReadLine()
+                .Split()
+                .Select(int.Parse)
+                .ToArray();
+
+            var stack = new Stack<int>(stackInput);
+
+            for (int i = 0; i < elementsToPop; i++)
+            {
+                stack.Pop();
+            }
+
+            if (stack.Contains(elementToLookFor))
+            {
+                Console.WriteLine("true");
+            }
+
+            else
+            {
+                Console.WriteLine(stack.Min());
+            }
+        }
+    }
+}
