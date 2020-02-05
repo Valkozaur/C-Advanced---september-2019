@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _3._Maximum_and_Minimum_Element
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var stack = new Stack<int>();
+
+            var numberOfOperations = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < numberOfOperations; i++)
+            {
+                var operations = Console.ReadLine()
+                    .Split()
+                    .Select(int.Parse)
+                    .ToArray();
+
+                var action = operations[0];
+
+                if (action == 1 && operations.Length == 2)
+                {
+                    var element = operations[1];
+                    stack.Push(element);
+                }
+
+                if (stack.Count > 0)
+                {
+
+                    if (action == 2)
+                    {
+
+                        stack.Pop();
+                    }
+
+                    else if (action == 3)
+                    {
+                        if (true)
+                        {
+
+                        }
+                        Console.WriteLine(stack.Max());
+                    }
+
+                    else if (action == 4)
+                    {
+                        Console.WriteLine(stack.Min());
+                    }
+                }
+            }
+
+            Console.WriteLine(String.Join(", ", stack));
+        }
+    }
+}
