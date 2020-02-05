@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _2._Basic_Queue_Operations
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var argumetents = Console.ReadLine()
+                .Split()
+                .Select(int.Parse)
+                .ToArray();
+
+            var timesToAdd = argumetents[0];
+            var timesToRemove = argumetents[1];
+            var elementToLookFor = argumetents[2];
+
+            if (timesToAdd == timesToRemove)
+            {
+                Console.WriteLine("0");
+                return;
+            }
+
+            var numbers = Console.ReadLine()
+                .Split()
+                .Select(int.Parse)
+                .ToArray();
+
+            var queue = new Queue<int>(numbers);
+
+            for (int i = 0; i < timesToRemove; i++)
+            {
+                queue.Dequeue();
+            }
+
+            if (queue.Contains(elementToLookFor))
+            {
+                Console.WriteLine("true");
+            }
+            else
+            {
+                Console.WriteLine(queue.Min());
+            }
+        }
+    }
+}
