@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _5.__Fashion_Boutique
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var clothesInTheBox = Console.ReadLine()
+                .Split()
+                .Select(int.Parse)
+                .ToArray();
+            var clothes = new Stack<int>(clothesInTheBox);
+
+            var rackCapacity = int.Parse(Console.ReadLine());
+            var racksUsed = 0;
+
+            while(clothes.Count != 0)
+            {
+                racksUsed++;
+                var currentRack = rackCapacity;
+
+                while (currentRack > 0)
+                {
+                    if (clothes.Count == 0)
+                    {
+                        break;
+                    }
+
+                    if (clothes.Peek() <= currentRack)
+                    {
+                        currentRack -= clothes.Pop();
+                        if (currentRack == 0)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            Console.WriteLine(racksUsed);
+        }
+    }
+}
