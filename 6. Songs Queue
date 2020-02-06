@@ -15,31 +15,33 @@ namespace _6.__Songs_Queue
 
             while (songsList.Count > 0)
             {
-                var commandInput = Console.ReadLine();
+                var inputLine = Console.ReadLine();
+                var splittedInput = inputLine
+                    .Split();
 
-                if (commandInput.Contains("Show"))
+                var command = splittedInput[0];
+
+                switch (command)
                 {
-                    Console.WriteLine(String.Join(", ", songsList));
-                }
-                else if (commandInput.Contains("Play"))
-                {
-                    if (songsList.Count > 0)
-                    {
+                    case "Play":
                         songsList.Dequeue();
-                    }
-                }
-                else if (commandInput.Contains("Add"))
-                {
+                        break;
 
-                    var song = commandInput.Substring(commandInput.IndexOf(' ') + 1);
-                    if (!songsList.Contains(song))
-                    {
-                        songsList.Enqueue(song);
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{song} is already contained!");
-                    }
+                    case "Add":
+                        var songName = inputLine.Substring(inputLine.IndexOf(' ') + 1);
+                        if (!songsList.Contains(songName))
+                        {
+                            songsList.Enqueue(songName);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{songName} is already contained!");
+                        }
+                        break;
+
+                    case "Show":
+                        Console.WriteLine(String.Join(", ", songsList));
+                        break;
                 }
             }
 
