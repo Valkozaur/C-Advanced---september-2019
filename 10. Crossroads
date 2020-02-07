@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+
+namespace _10.__Crossroads
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int durationOfGreenLight = int.Parse(Console.ReadLine());
+            int durationOfFreeWindow = int.Parse(Console.ReadLine());
+
+            Queue<string> carsQueue = new Queue<string>();
+            int totalCarsCount = 0;
+
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (input == "END")
+                {
+                    break;
+                }
+                else if (input == "green")
+                {
+                    var currentGreenLight = durationOfGreenLight;
+                    var currentFreeWindow = durationOfFreeWindow;
+
+                    string currentCar = String.Empty;
+                    int carLeftover = -1;
+
+                    while (currentGreenLight > 0)
+                    {
+                        if (carsQueue.Count == 0)
+                        {
+                            break;
+                        }
+
+                        currentCar = carsQueue.Dequeue();
+                        totalCarsCount++;
+                        int carLenght = currentCar.Length;
+
+                        for (int currentChar = 0; currentChar < carLenght; currentChar++)
+                        {
+                            currentGreenLight--;
+                            if (currentGreenLight == 0)
+                            {
+                                carLeftover = carLenght - (currentChar + 1);
+                                break;
+                            }
+                        }
+                    }
+
+                    if (carLeftover != -1 || carsQueue.Count > 0)
+                    {
+                        while (currentFreeWindow > 0)
+                        {
+                            carLeftover--;
+                            if (carLeftover == 0)
+                            {
+                                break;
+                            }
+                            currentFreeWindow--;
+                        }
+                    }
+
+                    if (carLeftover > 0)
+                    {
+                        Console.WriteLine("A crash happened!" + Environment.NewLine
+                             + $"{currentCar} was hit at {currentCar[currentCar.Length - carLeftover]}.");
+                        return;
+                    }
+                }
+
+                else
+                {
+                    string car = input;
+                    carsQueue.Enqueue(car);
+                }
+            }
+
+            Console.WriteLine("Everyone is safe." + Environment.NewLine +
+                $"{totalCarsCount} total cars passed the crossroads.");
+        }
+    }
+}
