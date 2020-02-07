@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace _9.__Simple_Text_Editor
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int numberOfCommands = int.Parse(Console.ReadLine());
+
+            var text = new StringBuilder();
+            var undoArchieve = new Stack<string>();
+            undoArchieve.Push(text.ToString());
+
+            for (int i = 0; i < numberOfCommands; i++)
+            {
+                var commandsInput = Console.ReadLine()
+                    .Split(' ');
+
+                var command = int.Parse(commandsInput[0]);
+
+                switch (command)
+                {
+                    case 1:
+
+                        var textToAppend = commandsInput[1];
+                        text.Append(textToAppend);
+
+                        undoArchieve.Push(text.ToString());
+                        break;
+
+                    case 2:
+
+                        int elementsToErase = int.Parse(commandsInput[1]);
+
+                        text = text.Remove(text.Length - elementsToErase, elementsToErase);
+                        undoArchieve.Push(text.ToString());
+                        
+
+                        break;
+
+                    case 3:
+                        var indexToPrint = int.Parse(commandsInput[1]);
+
+                        Console.WriteLine(text[indexToPrint - 1]);
+                        
+                        break;
+
+                    case 4:
+
+                        undoArchieve.Pop();
+                        text.Clear();
+                        text.Append(undoArchieve.Peek());
+
+                        break;
+                }
+            }
+        }
+    }
+}
