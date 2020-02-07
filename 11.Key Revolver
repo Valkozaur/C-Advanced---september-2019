@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _11._Key_Revolver
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var pricePerBullet = int.Parse(Console.ReadLine());
+            var gunBarrelSize = int.Parse(Console.ReadLine());
+
+            var bullets = Console.ReadLine()
+                .Split(" ")
+                .Select(int.Parse)
+                .ToArray();
+
+            var locks = Console.ReadLine()
+                .Split(" ")
+                .Select(int.Parse)
+                .ToArray();
+
+            var valueOfInteligence = int.Parse(Console.ReadLine());
+
+            var lockQueue = new Queue<int>(locks);
+            var bulletStack = new Stack<int>(bullets);
+
+            var bulletCounter = 0;
+
+            while (lockQueue.Count != 0 && bulletStack.Count != 0)
+            {
+                var currentBullet = bulletStack.Peek();
+                var currentLock = lockQueue.Peek();
+
+                if (currentBullet <= currentLock)
+                {
+                    Console.WriteLine("Bang!");
+                    lockQueue.Dequeue();
+                }
+                else
+                {
+                    Console.WriteLine("Ping!");
+                }
+
+                bulletStack.Pop();
+                bulletCounter++;
+
+                if (bulletCounter % gunBarrelSize == 0 && bulletStack.Count > 0)
+                {
+                    Console.WriteLine("Reloading!");
+                }
+
+
+                if (lockQueue.Count == 0)
+                {
+                    Console.WriteLine($"{bulletStack.Count} bullets left. Earned ${valueOfInteligence - pricePerBullet * bulletCounter}");
+                }
+                else if (bulletStack.Count == 0)
+                {
+                    Console.WriteLine($"Couldn't get through. Locks left: {lockQueue.Count}");
+                }
+            }
+        }
+    }
+}
