@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _12.__Cups_and_Bottles
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var cupsSequenceInput = Console.ReadLine()
+                .Split()
+                .Select(int.Parse)
+                .ToArray();
+            var cupsQueue = new Queue<int>(cupsSequenceInput);
+
+            var bottlesSequenceInput = Console.ReadLine()
+                .Split()
+                .Select(int.Parse)
+                .ToArray();
+            var bottlesStack = new Stack<int>(bottlesSequenceInput);
+
+            var wastedLitersOfWater = 0;
+
+            while (cupsQueue.Count != 0 && bottlesStack.Count != 0)
+            {
+                var currentCupValue = cupsQueue.Dequeue();
+
+                while (currentCupValue > 0)
+                {
+                    var currentBottleValue = bottlesStack.Pop();
+
+                    if (currentBottleValue >= currentCupValue) 
+                    { 
+                        wastedLitersOfWater += (currentBottleValue - currentCupValue);
+                        break;
+                    }
+
+                    currentCupValue -= currentBottleValue;
+                }
+
+                if (cupsQueue.Count == 0)
+                {
+                    Console.WriteLine($"Bottles: {String.Join(" ", bottlesStack)}" + Environment.NewLine 
+                        + $"Wasted litters of water: {wastedLitersOfWater}");
+                }
+                else if (bottlesStack.Count == 0)
+                {
+                    Console.WriteLine($"Cups: {String.Join(" ", cupsQueue)}" + Environment.NewLine
+                        + $"Wasted litters of water: {wastedLitersOfWater}");
+                }
+            }
+        }
+    }
+}
