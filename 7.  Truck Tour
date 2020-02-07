@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace _7.__Truck_Tour
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var numberOfPumbs = int.Parse(Console.ReadLine());
+            var circleOfPumps = new Queue<int>();
+            var index = 0;
+
+            for (int i = 0; i < numberOfPumbs; i++)
+            {
+                var inputPair = Console.ReadLine().
+                    Split();
+
+                var petrol = int.Parse(inputPair[0]);
+                var km = int.Parse(inputPair[1]);
+
+                circleOfPumps.Enqueue(petrol);
+                circleOfPumps.Enqueue(km);
+            }
+
+            while (true)
+            {
+                var copy = new Queue<int>(circleOfPumps);
+
+                var outerLiters = copy.Dequeue();
+                var outerKilometers = copy.Dequeue();
+
+                if (outerLiters < outerKilometers)
+                {
+                    circleOfPumps.Enqueue(circleOfPumps.Dequeue());
+                    circleOfPumps.Enqueue(circleOfPumps.Dequeue());
+                }
+                else if (outerLiters >= outerKilometers)
+                {
+                    var leftFuel = outerLiters - outerKilometers;
+                    while (copy.Any())
+                    {
+                        var internalFuel = copy.Dequeue();
+                        var internalKilometers = copy.Dequeue();
+
+                        if (leftFuel + internalFuel >= internalKilometers)
+                        {
+                            leftFuel = leftFuel + internalFuel - internalKilometers;
+                        }
+                        else
+                        {
+                            circleOfPumps.Enqueue(circleOfPumps.Dequeue());
+                            circleOfPumps.Enqueue(circleOfPumps.Dequeue());
+                            leftFuel = -1;
+                            break;
+                        }
+                    }
+
+                    if (leftFuel >= 0)
+                    {
+                        Console.WriteLine(index);
+                        break;
+                    }
+                }
+
+                index++;
+            }
+        }
+    }
+}
