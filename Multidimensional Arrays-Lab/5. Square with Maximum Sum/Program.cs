@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _4._Symbol_in_Matrix
+namespace _5._Square_with_Maximum_Sum
 {
     class Program
     {
