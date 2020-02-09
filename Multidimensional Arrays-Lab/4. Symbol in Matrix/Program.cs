@@ -32,10 +32,12 @@ namespace _4._Symbol_in_Matrix
                     if (currentSymbol == symbolToFind)
                     {
                         Console.WriteLine($"({row}, {col})");
-                        break;
+                        return;
                     }
                 }
             }
+
+            Console.WriteLine($"{symbolToFind} does not occur in the matrix ");
         }
     }
 }
