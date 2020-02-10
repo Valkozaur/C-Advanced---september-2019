@@ -8,7 +8,7 @@ namespace _2._2X2_Squares_in_Matrix
         static void Main(string[] args)
         {
             var dimensions = Console.ReadLine()
-                .Split()
+                .Split(" ", StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
                 .ToArray();
 
@@ -31,7 +31,7 @@ namespace _2._2X2_Squares_in_Matrix
             for (int row = 0; row < matrix.GetLength(0); row++)
             {
                 var currentRow = Console.ReadLine()
-                    .Split(" ")
+                    .Split(" ", StringSplitOptions.RemoveEmptyEntries)
                     .Select(char.Parse)
                     .ToArray();
 

@@ -17,7 +17,7 @@ namespace _1._Diagonal_Difference
             int rightDiagonal = matrixDiagonals[0];
             int leftDiagonal = matrixDiagonals[1];
 
-            Console.WriteLine(Math.Abs(rightDiagonal - leftDiagonal))
+            Console.WriteLine(Math.Abs(rightDiagonal - leftDiagonal));
         }
 
 
@@ -26,7 +26,7 @@ namespace _1._Diagonal_Difference
             for (int row = 0; row < matrix.GetLength(0); row++)
             {
                 int[] currentRow = Console.ReadLine()
-                    .Split(" ")
+                    .Split(" ", StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse)
                     .ToArray();
 
