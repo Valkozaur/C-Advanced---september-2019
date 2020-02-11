@@ -39,7 +39,7 @@ namespace _6._Jagged_Array_Manipulator
                 {
                     jaggedArray[targetRow][targetCol] += value;
                 }
-                else if (command == "Substract")
+                else if (command == "Subtract")
                 {
                     jaggedArray[targetRow][targetCol] -= value;
                 }

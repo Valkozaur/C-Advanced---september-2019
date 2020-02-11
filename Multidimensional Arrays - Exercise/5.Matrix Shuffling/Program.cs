@@ -12,7 +12,7 @@ namespace Matrix_Shuffling
                 .Select(int.Parse)
                 .ToArray();
 
-            var matrix = new string[dimensions[0], dimensions[1]];
+            var matrix = new char[dimensions[0], dimensions[1]];
             MatrixWrite(matrix);
 
             while (true)
@@ -41,7 +41,7 @@ namespace Matrix_Shuffling
 
                     if (firstAreValid && secondAreValid)
                     {
-                        var temp = String.Empty;
+                        var temp = ' ';
                         temp = matrix[firstRow, firstCol];
                         matrix[firstRow, firstCol] = matrix[secondRow, secondCol];
                         matrix[secondRow, secondCol] = temp;
@@ -62,12 +62,14 @@ namespace Matrix_Shuffling
             }
         }
 
-        static void MatrixWrite(string[,] matrix)
+        static void MatrixWrite(char[,] matrix)
         {
             for (int row = 0; row < matrix.GetLength(0); row++)
             {
                 var inputRows = Console.ReadLine()
-                .Split();
+                .Split(" )
+                .Select(int.Parse)
+                .ToArray();
 
                 for (int col = 0; col < matrix.GetLength(1); col++)
                 {
@@ -76,7 +78,7 @@ namespace Matrix_Shuffling
             }
         }
 
-        static void MatrixPrint(string[,] matrix)
+        static void MatrixPrint(char[,] matrix)
         {
             for (int row = 0; row < matrix.GetLength(0); row++)
             {
