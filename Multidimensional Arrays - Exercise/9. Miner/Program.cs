@@ -9,18 +9,19 @@ namespace _9._Miner
         static void Main(string[] args)
         {
             int size = int.Parse(Console.ReadLine());
-            char[,] minerField = new char[size, size];
+            char[,] mineField = new char[size, size];
+
+            int minerRow = 0;
+            int minerCol = 0;
+            int coalsTotalCount = 0;
+            MinerFieldWrite(mineField, ref minerRow, ref minerCol,ref coalsTotalCount);
+
 
             string[] movesInput = Console.ReadLine()
                 .Split(" ");
             Queue<string> minerMoves = new Queue<string>(movesInput);
             Dictionary<string, List<int>> moves = new Dictionary<string, List<int>>();
-            MovesCoordinates(moves); 
-
-            int minerRow = 0;
-            int minerCol = 0;
-            int coalsTotalCount = 0;
-            MinerFieldWrite(minerField, ref minerRow, ref minerCol,ref coalsTotalCount);
+            MovesCoordinates(moves);
 
             int coalCounter = 0;
             
@@ -35,92 +36,101 @@ namespace _9._Miner
                     case "left":
                         moveRow = moves["left"][0];
                         moveCol = moves["left"][1];
-                        if (StaysInTheField(minerField, minerRow + moveRow, minerCol + moveCol))
+                        if (StaysInTheField(mineField, minerRow + moveRow, minerCol + moveCol))
                         {
-                            minerField[minerRow, minerCol] = '*';
-                            minerRow = minerRow + moveRow;
-                            minerCol = minerCol + moveCol;
+                            NewMethod(mineField, ref minerRow, ref minerCol, moveRow, moveCol);
 
-                            if (minerField[minerRow, minerCol] == 'c')
+                            if (mineField[minerRow, minerCol] == 'c')
                             {
                                 coalCounter++;
                             }
-                            else if(minerField[minerRow, minerCol] == 'e')
+                            else if (mineField[minerRow, minerCol] == 'e')
                             {
                                 Console.WriteLine($"Game over! ({minerRow}, {minerCol})");
                                 return;
                             }
 
-                            minerField[minerRow, minerCol] = 'm';
+                            mineField[minerRow, minerCol] = 'm';
+                        }
+                        else 
+                        {
+                            if (minerRow + moveRow == mineField.GetLength(0))
+                            {
+
+                            }
+                            else if(minerCol + moveCol == mineField.GetLength(1))
+                            {
+
+                            }
                         }
                         break;
 
                     case "right":
                         moveRow = moves["right"][0];
                         moveCol = moves["right"][1];
-                        if (StaysInTheField(minerField, minerRow + moveRow, minerCol + moveCol))
+                        if (StaysInTheField(mineField, minerRow + moveRow, minerCol + moveCol))
                         {
-                            minerField[minerRow, minerCol] = '*';
+                            mineField[minerRow, minerCol] = '*';
                             minerRow = minerRow + moveRow;
                             minerCol = minerCol + moveCol;
 
-                            if (minerField[minerRow, minerCol] == 'c')
+                            if (mineField[minerRow, minerCol] == 'c')
                             {
                                 coalCounter++;
                             }
-                            else if (minerField[minerRow, minerCol] == 'e')
+                            else if (mineField[minerRow, minerCol] == 'e')
                             {
                                 Console.WriteLine($"Game over! ({minerRow}, {minerCol})");
                                 return;
                             }
 
-                            minerField[minerRow, minerCol] = 'm';
+                            mineField[minerRow, minerCol] = 'm';
                         }
                         break;
 
                     case "up":
                         moveRow = moves["up"][0];
                         moveCol = moves["up"][1];
-                        if (StaysInTheField(minerField, minerRow + moveRow, minerCol + moveCol))
+                        if (StaysInTheField(mineField, minerRow + moveRow, minerCol + moveCol))
                         {
-                            minerField[minerRow, minerCol] = '*';
+                            mineField[minerRow, minerCol] = '*';
                             minerRow = minerRow + moveRow;
                             minerCol = minerCol + moveCol;
 
-                            if (minerField[minerRow, minerCol] == 'c')
+                            if (mineField[minerRow, minerCol] == 'c')
                             {
                                 coalCounter++;
                             }
-                            else if (minerField[minerRow, minerCol] == 'e')
+                            else if (mineField[minerRow, minerCol] == 'e')
                             {
                                 Console.WriteLine($"Game over! ({minerRow}, {minerCol})");
                                 return;
                             }
 
-                            minerField[minerRow, minerCol] = 'm';
+                            mineField[minerRow, minerCol] = 'm';
                         }
                         break;
 
                     case "down":
                         moveRow = moves["down"][0];
                         moveCol = moves["down"][1];
-                        if (StaysInTheField(minerField, minerRow + moveRow, minerCol + moveCol))
+                        if (StaysInTheField(mineField, minerRow + moveRow, minerCol + moveCol))
                         {
-                            minerField[minerRow, minerCol] = '*';
+                            mineField[minerRow, minerCol] = '*';
                             minerRow = minerRow + moveRow;
                             minerCol = minerCol + moveCol;
 
-                            if (minerField[minerRow, minerCol] == 'c')
+                            if (mineField[minerRow, minerCol] == 'c')
                             {
                                 coalCounter++;
                             }
-                            else if (minerField[minerRow, minerCol] == 'e')
+                            else if (mineField[minerRow, minerCol] == 'e')
                             {
                                 Console.WriteLine($"Game over! ({minerRow}, {minerCol})");
                                 return;
                             }
 
-                            minerField[minerRow, minerCol] = 'm';
+                            mineField[minerRow, minerCol] = 'm';
                         }
                         break;
                 }
@@ -134,6 +144,14 @@ namespace _9._Miner
 
             Console.WriteLine($"{coalsTotalCount - coalCounter} coals left. ({minerRow}, {minerCol})");
         }
+
+        private static void NewMethod(char[,] mineField, ref int minerRow, ref int minerCol, int moveRow, int moveCol)
+        {
+            mineField[minerRow, minerCol] = '*';
+            minerRow = minerRow + moveRow;
+            minerCol = minerCol + moveCol;
+        }
+
         private static bool StaysInTheField(char[,] minerField, int row, int col)
         {
             return 0 <= row && row < minerField.GetLength(0)
