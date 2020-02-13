@@ -9,8 +9,10 @@ namespace _10._Radioactive_Mutant_Vampire_Bunnies
         static char[,] bunnyLair;
         static int playerRow;
         static int playerCol;
+        static bool gameOver;
         static void Main(string[] args)
         {
+            gameOver = false;
             int[] dimensions = Console.ReadLine()
                 .Split(" ")
                 .Select(int.Parse)
@@ -103,22 +105,30 @@ namespace _10._Radioactive_Mutant_Vampire_Bunnies
         private static void Move(int row, int col)
         {
             if (!IndexIsValid(playerRow + row, playerCol + col))
-            {
-                Write();
-                Console.WriteLine($"won: {playerRow} {playerCol}");
-                Environment.Exit(0);
+            {            
+                gameOver = true;
             }
 
             bunnyLair[playerRow, playerCol] = '.';
-            playerRow += row;
-            playerCol += col;
+            if (!gameOver)
+            {
+                playerRow += row;
+                playerCol += col;
+            }
 
             Spread();
 
-            if (bunnyLair[playerRow, playerCol] == 'B')
+            if (!gameOver && bunnyLair[playerRow, playerCol] == 'B')
             {
                 Write();
                 Console.WriteLine($"dead: {playerRow} {playerCol}");
+                Environment.Exit(0);
+            }
+
+            if (gameOver)
+            {
+                Write();
+                Console.WriteLine($"won: {playerRow} {playerCol}");
                 Environment.Exit(0);
             }
         }

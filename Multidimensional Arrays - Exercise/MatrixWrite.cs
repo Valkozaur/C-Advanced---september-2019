@@ -4,7 +4,7 @@ public class MatrixWrite
 {
 	public MatrixWrite()
 	{
-        private static void MatrixWrite(int[,] matrix)
+         static void MatrixWrite(int[,] matrix)
         {
             for (int row = 0; row < matrix.GetLength(0); row++)
             {
