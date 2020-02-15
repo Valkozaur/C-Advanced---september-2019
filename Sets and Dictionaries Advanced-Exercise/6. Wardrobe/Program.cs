@@ -35,24 +35,24 @@ namespace _6._Wardrobe
 
             }
 
-            var toFind = Console.ReadLine()
+            var targetClothing = Console.ReadLine()
                 .Split();
-            var color = toFind[0];
-            var clothingToFind = toFind[1];
+            var targetColor = targetClothing[0];
+            var clothingToFind = targetClothing[1];
 
-            foreach (var colorCollection in wardrobe)
+            foreach (var (color, clothes) in wardrobe)
             {
-                Console.WriteLine($"{colorCollection.Key} clothes:");
+                Console.WriteLine($"{color} clothes:");
 
-                foreach (var clothing in colorCollection.Value)
+                foreach (var (clothing, count) in clothes)
                 {
-                    if (color == colorCollection.Key && clothingToFind == clothing.Key)
+                    if (targetColor == color && clothingToFind == clothing)
                     {
-                        Console.WriteLine($"* {clothing.Key} - {clothing.Value} (found!)");
+                        Console.WriteLine($"* {clothing} - {count} (found!)");
                         continue;
                     }
 
-                    Console.WriteLine($"* {clothing.Key} - {clothing.Value}");
+                    Console.WriteLine($"* {clothing} - {count}");
 
                 }
             }
