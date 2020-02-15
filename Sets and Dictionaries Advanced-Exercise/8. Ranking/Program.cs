@@ -64,32 +64,16 @@ namespace Problem_8._Ranking
                 {
                     if (usersAndPoints[user][contestName] < points)
                     {
-                        usersRanking[user] -= usersAndPoints[user][contestName];
                         usersAndPoints[user][contestName] = points;
                     }
-                    else
-                    {
-                        continue;
-                    }
                 }
-
-                if (!usersRanking.ContainsKey(user))
-                {
-                    usersRanking.Add(user, 0);
-                }
-                usersRanking[user] += points;
             }
 
-            usersRanking = usersRanking
-                .OrderByDescending(x => x.Value)
-                .ToDictionary(k => k.Key, v => v.Value);
+            var topStudent = usersAndPoints
+                 .OrderByDescending(x => x.Value.Sum(s => s.Value))
+                 .FirstOrDefault();
 
-            foreach (var user in usersRanking)
-            {
-                Console.WriteLine($"Best candidate is {user.Key} with total {user.Value} points.");
-                break;
-            }
-
+            Console.WriteLine($"Best candidate is {topStudent.Key} with total {topStudent.Value.Sum(x => x.Value)} points.");
 
             Console.WriteLine("Ranking:");
             foreach (var (user, contestCollection) in usersAndPoints.OrderBy(x => x.Key))
