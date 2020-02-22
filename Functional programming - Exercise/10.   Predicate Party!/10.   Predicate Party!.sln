@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10.   Predicate Party!", "10.   Predicate Party!.csproj", "{AD7E1169-4CB6-4EE9-94F2-24F4F016DE29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10.   Predicate Party! version 2", "..\10.   Predicate Party! version 2\10.   Predicate Party! version 2.csproj", "{5B616102-0A33-477C-9882-F288FF98AF6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD7E1169-4CB6-4EE9-94F2-24F4F016DE29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD7E1169-4CB6-4EE9-94F2-24F4F016DE29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD7E1169-4CB6-4EE9-94F2-24F4F016DE29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD7E1169-4CB6-4EE9-94F2-24F4F016DE29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B616102-0A33-477C-9882-F288FF98AF6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B616102-0A33-477C-9882-F288FF98AF6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B616102-0A33-477C-9882-F288FF98AF6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B616102-0A33-477C-9882-F288FF98AF6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A31974B-708A-4726-A682-BF138864D42E}
+	EndGlobalSection
+EndGlobal
