@@ -43,7 +43,7 @@
 
             sb.AppendLine($"{this.Model}:");
             sb.AppendLine($"{this.Engine}");
-            sb.AppendLine(this.Weight == -1
+            sb.AppendLine(this.Weight > -1
                 ? $"  Weight: {this.Weight}"
                 : "  Weight: n/a");
             sb.Append($"  Color: {this.Color}");

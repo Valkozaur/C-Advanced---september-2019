@@ -86,8 +86,8 @@
                 }
                 else if (engineInfo.Length == 3)
                 {
-                    var isDisplacement = int.TryParse(engineInfo[2], out int displacement);
-
+                    int displacement = 0;
+                    var isDisplacement = int.TryParse(engineInfo[2], out displacement);
                     if (isDisplacement)
                     {
                         engine = new Engine(model, power, displacement);

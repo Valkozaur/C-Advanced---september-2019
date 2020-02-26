@@ -1,8 +1,6 @@
 ﻿
 namespace DefiningClasses
 {
-    using System;
-    using System.Collections.Generic;
     using System.Text;
 
     class Engine
@@ -44,7 +42,7 @@ namespace DefiningClasses
 
             sb.AppendLine($"  {this.Model}:");
             sb.AppendLine($"    Power: {this.Power}");
-            sb.AppendLine(this.Displacement == -1
+            sb.AppendLine(this.Displacement > -1
                 ? $"    Displacement: {this.Displacement}"
                 : "    Displacement: n/a");
             sb.Append($"    Efficiency: {this.Efficiency}");
