@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftUniParking", "SoftUniParking.csproj", "{30C922D6-112E-4C50-BF5D-28FD0D1D8FEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30C922D6-112E-4C50-BF5D-28FD0D1D8FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30C922D6-112E-4C50-BF5D-28FD0D1D8FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30C922D6-112E-4C50-BF5D-28FD0D1D8FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30C922D6-112E-4C50-BF5D-28FD0D1D8FEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00C41340-6F25-404F-919A-E500690E08FE}
+	EndGlobalSection
+EndGlobal
