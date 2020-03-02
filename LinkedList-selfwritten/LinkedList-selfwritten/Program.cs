@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace LinkedList_selfwritten
 {
@@ -6,7 +7,6 @@ namespace LinkedList_selfwritten
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
         }
     }
 }
