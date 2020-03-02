@@ -1,12 +1,11 @@
-﻿using System;
-
-namespace MyList_selfmade
+﻿namespace MyList_selfmade
 {
-    class Program
+    using System;
+
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            Console.WriteLine("Hello World!");
         }
     }
 }
