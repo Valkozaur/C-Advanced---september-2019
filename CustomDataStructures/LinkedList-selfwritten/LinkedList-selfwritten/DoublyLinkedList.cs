@@ -24,7 +24,7 @@ namespace LinkedList_selfwritten
 
         public Node Tail { get; set; }
 
-        public int Count { get; set; } = 0;
+        public int Count { get; private set; } = 0;
 
         public void AddHead(object value)
         {
