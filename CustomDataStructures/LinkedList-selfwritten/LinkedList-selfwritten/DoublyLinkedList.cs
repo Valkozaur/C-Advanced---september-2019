@@ -4,31 +4,31 @@ using System.Text;
 
 namespace LinkedList_selfwritten
 {
-    class DoublyLinkedList
+    class DoublyLinkedList<T>
     {
-        internal class Node
+        internal class Node<T>
         {
-            public Node(object value)
+            public Node(T value)
             {
                 this.Value = value;
             }
 
-            public object Value { get; set; }
+            public T Value { get; set; }
 
-            public Node PreviousNode { get; set; }
+            public Node<T> PreviousNode { get; set; }
 
-            public Node NextNode { get; set; }
+            public Node<T> NextNode { get; set; }
         }
 
-        public Node Head { get; set; }
+        public Node<T> Head { get; set; }
 
-        public Node Tail { get; set; }
+        public Node<T> Tail { get; set; }
 
         public int Count { get; private set; } = 0;
 
-        public void AddHead(object value)
+        public void AddHead(T value)
         {
-            var newNode = new Node(value);
+            var newNode = new Node<T>(value);
             if (this.Count == 0)
             {
                 this.Head = this.Tail = newNode;
@@ -44,9 +44,9 @@ namespace LinkedList_selfwritten
             Count++;
         }
 
-        public void AddTail(object value)
+        public void AddTail(T value)
         {
-            var newNode = new Node(value);
+            var newNode = new Node<T>(value);
             if (this.Count == 0)
             {
                 this.Head = this.Tail = newNode;
