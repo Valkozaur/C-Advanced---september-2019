@@ -1,19 +1,24 @@
-﻿namespace _1._ListyIterator
+﻿using System.Collections;
+
+namespace _1._ListyIterator
 {
     using System.Collections.Generic;
     using System.Linq;
-    public class ListyIterator<T>
+    public class ListyIterator<T> : IEnumerable<T>
     {
-        private List<string> collection;
-        private int internalIndex = 0;
+        private const int internalIndexInitialValue= 0;
+
+        private List<T> collection;
+        private int internalIndex;
 
         public ListyIterator()
         {
-            this.collection = new List<string>();
+            this.collection = new List<T>();
+            this.internalIndex = internalIndexInitialValue;
         }
-        public ListyIterator(string collectionInput)
+        public ListyIterator(IEnumerable<T> initialData)
         {
-            this.collection = collectionInput.Split(" ").ToList();
+            this.collection = new List<T>(initialData);
         }
 
         public string Move()
@@ -47,8 +52,21 @@
             }
             else
             {
-                return collection[internalIndex];
+                return collection[internalIndex].ToString();
             }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach (var element in collection)
+            {
+                yield return element;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

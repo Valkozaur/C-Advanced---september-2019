@@ -1,4 +1,7 @@
-﻿namespace _1._ListyIterator
+﻿using System.Linq;
+using System.Text;
+
+namespace _1._ListyIterator
 {
     using System;
     public class Program
@@ -6,16 +9,15 @@
         static void Main(string[] args)
         {
 
-            var create = Console.ReadLine();
-            if (create.EndsWith("Create"))
+            var creationData = Console.ReadLine().Split();
+            if (creationData.Length == 1)
             {
                 var listyList = new ListyIterator<string>();
                 Operations(listyList);
             }
             else
             {
-                var collection = create.Substring(create.IndexOf(" ") + 1);
-                var listyList = new ListyIterator<string>(collection);
+                var listyList = new ListyIterator<string>(creationData.Skip(1));
                 Operations(listyList);
             }
         }
@@ -38,6 +40,16 @@
                 else if (command == "Print")
                 {
                     elementToPrint = collection.Print();
+                }
+                else if (command == "PrintAll")
+                {
+                    var toPrint = new StringBuilder();
+                    foreach (var element in collection)
+                    {
+                        toPrint.Append(element + " ");
+                    }
+
+                    Console.Write(toPrint);
                 }
                 else if (command == "END")
                 {
