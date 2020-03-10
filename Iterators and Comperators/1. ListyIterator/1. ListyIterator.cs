@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 namespace _1._ListyIterator
 {
@@ -21,34 +22,31 @@ namespace _1._ListyIterator
             this.collection = new List<T>(initialData);
         }
 
-        public string Move()
+        public bool Move()
         {
-            if (internalIndex + 1 >= collection.Count)
-            {
-                return "False";
-            }
-            else
+            if (HasNext())
             {
                 internalIndex++;
-                return "True";
+                return true;
             }
+            return false;
         }
 
-        public string HasNext()
+        public bool HasNext()
         {
-            if (internalIndex + 1 >= collection.Count)
+            if (internalIndex + 1 < collection.Count)
             {
-                return "False";
+                return true;
             }
 
-            return "True";
+            return false;
         }
 
         public string Print()
         {
             if (collection.Count == 0)
             {
-                return "Invalid Operation!";
+                throw new IndexOutOfRangeException("Invalid Operation!") ;
             }
             else
             {

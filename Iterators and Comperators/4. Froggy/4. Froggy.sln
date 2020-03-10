@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1. ListyIterator", "1. ListyIterator.csproj", "{04E001B0-62D3-41F9-A758-36EA46395B87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4. Froggy", "4. Froggy.csproj", "{1C95D2A2-6FDB-4BD1-9C43-79F49EC93C57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{04E001B0-62D3-41F9-A758-36EA46395B87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04E001B0-62D3-41F9-A758-36EA46395B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04E001B0-62D3-41F9-A758-36EA46395B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04E001B0-62D3-41F9-A758-36EA46395B87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C95D2A2-6FDB-4BD1-9C43-79F49EC93C57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C95D2A2-6FDB-4BD1-9C43-79F49EC93C57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C95D2A2-6FDB-4BD1-9C43-79F49EC93C57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C95D2A2-6FDB-4BD1-9C43-79F49EC93C57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5002E92A-B112-440A-8B92-16FDA8139F21}
+		SolutionGuid = {D9DD73E2-0589-41A2-9AD8-9D2C01E9B41A}
 	EndGlobalSection
 EndGlobal
