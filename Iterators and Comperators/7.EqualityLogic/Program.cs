@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace _7.EqualityLogic
+﻿namespace _7.EqualityLogic
 {
     using System;
+    using System.Collections.Generic;
     public class Program
     {
         public static void Main()
@@ -12,7 +11,7 @@ namespace _7.EqualityLogic
 
             var numberOfLines = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i < numberOfLines; i++)
+            for (var i = 0; i < numberOfLines; i++)
             {
                 var input = Console.ReadLine()
                     .Split();
