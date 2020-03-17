@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-
-namespace _8.PetClinics
+﻿namespace _8.PetClinics
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class Clinic : IEnumerable<Pet>
     {
-        private int patientsCount;
+        private Dictionary<int, Pet> rooms;
+        private int roomsCount;
+
         public Clinic(string name, int numberOfRooms)
         {
 
             if (numberOfRooms % 2 != 0)
             {
                 this.Name = name;
-                this.Rooms = new Pet[numberOfRooms];
-                patientsCount = 0;
+                this.rooms = new Dictionary<int, Pet>();
+                this.roomsCount = numberOfRooms;
             }
             else
             {
@@ -26,41 +27,32 @@ namespace _8.PetClinics
 
         public string Name { get; set; }
 
-        public Pet[] Rooms { get; set; }
-
         public bool AddPet(Pet pet)
         {
-            if (patientsCount == Rooms.Length)
+            if (rooms.Count == this.roomsCount)
             {
                 return false;
             }
 
-            var middleRoom = Rooms.Length / 2;
+            var middleRoom = this.roomsCount / 2 + 1;
 
-            var roomsToTheLeft = 1;
-            var roomsToTheRight = 1;
 
-            for (int i = 0; i < Rooms.Length; i++)
+            for (var i = 1; i <= this.roomsCount; i++)
             {
-                if(Rooms[middleRoom] == null)
+                if (!this.rooms.ContainsKey(middleRoom))
                 {
-                    Rooms[middleRoom] = pet;
-                    patientsCount++;
+                    this.rooms[middleRoom] = pet;
                     return true;
                 }
 
-                if (patientsCount % 2 != 0)
+                if (!this.rooms.ContainsKey(middleRoom - i))
                 {
-                    Rooms[middleRoom - roomsToTheLeft] = pet;
-                    roomsToTheLeft++;
-                    patientsCount++;
+                    this.rooms[middleRoom - i] = pet;
                     return true;
                 }
-                else
+                else if (!this.rooms.ContainsKey(middleRoom + i))
                 {
-                    Rooms[middleRoom + roomsToTheRight] = pet;
-                    roomsToTheRight++;
-                    patientsCount++;
+                    this.rooms[middleRoom + i] = pet;
                     return true;
                 }
             }
@@ -70,28 +62,26 @@ namespace _8.PetClinics
 
         public bool Release()
         {
-            if (patientsCount == 0)
+            if (this.rooms.Count == 0)
             {
                 return false;
             }
 
-            var middleRoom = Rooms.Length / 2;
-            for (int i = middleRoom; i < Rooms.Length; i++)
+            var middleRoom = this.roomsCount / 2 + 1;
+            for (int i = middleRoom; i <= this.roomsCount; i++)
             {
-                if (Rooms[i] != null)
+                if (this.rooms.ContainsKey(i))
                 {
-                    Rooms[i] = null;
-                    patientsCount--;
+                    this.rooms.Remove(i);
                     return true;
                 }
             }
 
-            for (int i = middleRoom; i >= 0; i--)
+            for (var i = middleRoom - 1; i > 0; i--)
             {
-                if (Rooms[i] != null)
+                if (this.rooms.ContainsKey(i))
                 {
-                    Rooms[i] = null;
-                    patientsCount--;
+                    this.rooms[i] = null;
                     return true;
                 }
             }
@@ -99,15 +89,44 @@ namespace _8.PetClinics
             return false;
         }
 
-        public bool HasEmptyRooms() => patientsCount < Rooms.Length;
+        public bool HasEmptyRooms() => this.rooms.Count < this.roomsCount;
+
+        public string Print()
+        {
+            var stringBuilder = new StringBuilder();
+            for (var i = 1; i <= this.roomsCount; i++)
+            {
+                if (!this.rooms.ContainsKey(i))
+                {
+                    stringBuilder.AppendLine("Room empty");
+                }
+                else
+                {
+                    stringBuilder.AppendLine(this.rooms[i].ToString());
+                }
+            }
+
+            return stringBuilder.ToString().TrimEnd();
+        }
 
         public string PrintRoom(int roomNumber)
         {
-            return Rooms[roomNumber].ToString();
+            var stringBuilder = new StringBuilder();
+            if (!this.rooms.ContainsKey(roomNumber))
+            {
+                stringBuilder.AppendLine("Room empty");
+            }
+            else
+            {
+                stringBuilder.AppendLine(rooms[roomNumber].ToString());
+            }
+
+            return stringBuilder.ToString().TrimEnd();
         }
+
         public IEnumerator<Pet> GetEnumerator()
         {
-            foreach (var pet in Rooms)
+            foreach (var (number, pet) in this.rooms)
             {
                 yield return pet;
             }

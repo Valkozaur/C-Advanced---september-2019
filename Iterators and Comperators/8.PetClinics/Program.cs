@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace _8.PetClinics
+﻿namespace _8.PetClinics
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -20,93 +20,85 @@ namespace _8.PetClinics
 
                 if (splitCommand[0] == "Create")
                 {
-                    if (splitCommand[1] == "Pet")
+                    switch (splitCommand[1])
                     {
-                        var petInfo = splitCommand
-                            .Skip(2)
-                            .ToArray();
-
-                        var name = petInfo[0];
-                        var age = int.Parse(petInfo[1]);
-                        var kind = petInfo[2];
-
-                        var pet = new Pet(name, age, kind);
-                        pets.Add(pet);
-                    }
-                    else if (splitCommand[1] == "Clinic")
-                    {
-                        var clinicInfo = splitCommand
-                            .Skip(2)
-                            .ToArray();
-
-                        var clinicName = clinicInfo[0];
-                        var numberOfRooms = int.Parse(clinicInfo[1]);
-
-                        Clinic clinic = null;
-                        try
-                        {
-                            clinic = new Clinic(clinicName, numberOfRooms);
-                        }
-                        catch (InvalidOperationException e)
-                        {
-                            Console.WriteLine(e.Message);
-                            continue;
-                        }
-
-                        clinics.Add(clinic);
-                    }
-                }
-                else if (splitCommand[0] == "Add")
-                {
-                    var patientName = splitCommand[1];
-                    var clinicName = splitCommand[2];
-                    var patient = pets.FirstOrDefault(x => x.Name == patientName);
-                    var clinic = clinics.FirstOrDefault(x => x.Name == clinicName);
-                    Console.WriteLine(clinic.AddPet(patient));
-                }
-                else if(splitCommand[0] == "Release") 
-                {
-                    var clinicName = splitCommand[1];
-                    var clinic = clinics.FirstOrDefault(x => x.Name == clinicName);
-                    Console.WriteLine(clinic.Release());
-                }
-                else if (splitCommand[0] == "HasEmptyRooms")
-                {
-                    var clinicName = splitCommand[1];
-                    var clinic = clinics.FirstOrDefault(x => x.Name == clinicName);
-                    Console.WriteLine(clinic.HasEmptyRooms());
-                }
-                else if (splitCommand[0] == "Print")
-                {
-                    var clinicName = splitCommand[1];
-                    if (splitCommand.Length == 2)
-                    {
-                        var clinic = clinics.FirstOrDefault(x => x.Name == clinicName);
-                        foreach (var patient in clinic)
-                        {
-                            if (patient == null)
+                        case "Pet":
                             {
-                                Console.WriteLine("Room empty");
+                                var petInfo = splitCommand
+                                    .Skip(2)
+                                    .ToArray();
+
+                                var name = petInfo[0];
+                                var age = int.Parse(petInfo[1]);
+                                var kind = petInfo[2];
+
+                                var pet = new Pet(name, age, kind);
+                                pets.Add(pet);
+                                break;
+                            }
+                        case "Clinic":
+                            {
+                                var clinicInfo = splitCommand
+                                    .Skip(2)
+                                    .ToArray();
+
+                                var clinicName = clinicInfo[0];
+                                var numberOfRooms = int.Parse(clinicInfo[1]);
+
+                                Clinic clinic = null;
+                                try
+                                {
+                                    clinic = new Clinic(clinicName, numberOfRooms);
+                                }
+                                catch (InvalidOperationException e)
+                                {
+                                    Console.WriteLine(e.Message);
+                                    continue;
+                                }
+
+                                clinics.Add(clinic);
+                                break;
+                            }
+                    }
+                }
+
+                var clinicNeeded = splitCommand[1];
+                var clinicFound = clinics.FirstOrDefault(x => x.Name == clinicNeeded);
+
+                switch (splitCommand[0])
+                {
+                    case "Add":
+                        {
+                            var patientName = splitCommand[1];
+                            clinicNeeded = splitCommand[2];
+                            clinicFound = clinics.FirstOrDefault(x => x.Name == clinicNeeded);
+                            var patient = pets.FirstOrDefault(x => x.Name == patientName);
+                            Console.WriteLine(clinicFound.AddPet(patient));
+                            break;
+                        }
+                    case "Release":
+                        {
+                            Console.WriteLine(clinicFound.Release());
+                            break;
+                        }
+                    case "HasEmptyRooms":
+                        {
+                            Console.WriteLine(clinicFound.HasEmptyRooms());
+                            break;
+                        }
+                    case "Print":
+                        {
+                            if (splitCommand.Length == 2)
+                            {
+                                Console.WriteLine(clinicFound.Print());
                             }
                             else
                             {
-                                Console.WriteLine(patient);
+                                var roomNumber = int.Parse(splitCommand[2]);
+                                Console.WriteLine(clinicFound.PrintRoom(roomNumber));
                             }
+                            break;
                         }
-                    }
-                    else
-                    {
-                        var roomNumber = int.Parse(splitCommand[2]);
-                        var clinic = clinics.FirstOrDefault(x => x.Name == clinicName);
-                        if (clinic.Rooms[roomNumber - 1] == null)
-                        {
-                            Console.WriteLine("Room empty");
-                        }
-                        else
-                        {
-                            Console.WriteLine(clinic.Rooms[roomNumber - 1]);
-                        }
-                    }
                 }
             }
         }
