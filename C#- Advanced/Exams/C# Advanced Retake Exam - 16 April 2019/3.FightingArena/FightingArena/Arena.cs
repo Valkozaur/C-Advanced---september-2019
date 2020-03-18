@@ -5,13 +5,19 @@ namespace FightingArena
 {
     public class Arena
     {
+        public Arena(string name)
+        {
+            this.Name = name;
+            this.gladiators = new HashSet<Gladiator>();
+        }
+
         private HashSet<Gladiator> gladiators;
 
         public string Name { get; set; }
 
-        public int Count => gladiators.Count;
+        public int Count => this.gladiators.Count;
 
-        public void AddGladiator(Gladiator gladiator)
+        public void Add(Gladiator gladiator)
         {
             gladiators.Add(gladiator);
         }
@@ -22,13 +28,13 @@ namespace FightingArena
             gladiators.Remove(gladiatorToRemove);
         }
 
-        public Gladiator GetGladiatorWithHighestStatPower() =>
+        public Gladiator GetGladitorWithHighestStatPower() =>
             gladiators.FirstOrDefault(x => x.GetStatPower() == gladiators.Max(m => m.GetStatPower()));
 
-        public Gladiator GetGladiatorWithHighestWeaponPower() =>
+        public Gladiator GetGladitorWithHighestWeaponPower() =>
             gladiators.FirstOrDefault(x => x.GetWeaponPower() == gladiators.Max(m => m.GetWeaponPower()));
 
-        public Gladiator GetGladiatorWithHighestTotalPower() =>
+        public Gladiator GetGladitorWithHighestTotalPower() =>
             gladiators.FirstOrDefault(x => x.GetTotalPower() == gladiators.Max(m => m.GetTotalPower()));
 
         public override string ToString()
