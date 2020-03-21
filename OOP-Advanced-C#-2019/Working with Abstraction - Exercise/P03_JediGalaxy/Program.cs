@@ -1,65 +1,112 @@
-﻿using System;
-using System.Linq;
-
-namespace P03_JediGalaxy
+﻿namespace P03_JediGalaxy
 {
-    class Program
+    using System;
+    using System.Linq;
+
+    public class Program
     {
-        static void Main()
+        private static int[,] matrix;
+
+        public static void Main()
         {
-            int[] dimestions = Console.ReadLine().Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-            int x = dimestions[0];
-            int y = dimestions[1];
+            MatrixInput();
+            Console.WriteLine(GalaxyFights());
+        }
 
-            int[,] matrix = new int[x, y];
+        public static void MatrixInput()
+        {
+            var dimensions = Console.ReadLine()
+                .Split(" ")
+                .Select(int.Parse)
+                .ToArray();
 
-            int value = 0;
-            for (int i = 0; i < x; i++)
+            var rows = dimensions[0];
+            var columns = dimensions[1];
+
+            matrix = new int[rows, columns];
+
+            var value = 0;
+            for (var row = 0; row < matrix.GetLength(0); row++)
             {
-                for (int j = 0; j < y; j++)
+                for (var col = 0; col < matrix.GetLength(1); col++)
                 {
-                    matrix[i, j] = value++;
+                    matrix[row, col] = value++;
                 }
             }
+        }
 
-            string command = Console.ReadLine();
-            long sum = 0;
+        public static int GalaxyFights()
+        {
+            var command = Console.ReadLine();
+            var sum = 0;
             while (command != "Let the Force be with you")
             {
-                int[] ivoS = command.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-                int[] evil = Console.ReadLine().Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-                int xE = evil[0];
-                int yE = evil[1];
+                var ivoS = command
+                    .Split(" ")
+                    .Select(int.Parse)
+                    .ToArray();
 
-                while (xE >= 0 && yE >= 0)
-                {
-                    if (xE >= 0 && xE < matrix.GetLength(0) && yE >= 0 && yE < matrix.GetLength(1))
-                    {
-                        matrix[xE, yE] = 0;
-                    }
-                    xE--;
-                    yE--;
-                }
+                var evil = Console.ReadLine()
+                    .Split(" ")
+                    .Select(int.Parse)
+                    .ToArray();
 
-                int xI = ivoS[0];
-                int yI = ivoS[1];
+                var evilRow = evil[0];
+                var evilCol = evil[1];
+                var isEvil = true;
+                Func<int, bool> func = i => i >= 0;
 
-                while (xI >= 0 && yI < matrix.GetLength(1))
-                {
-                    if (xI >= 0 && xI < matrix.GetLength(0) && yI >= 0 && yI < matrix.GetLength(1))
-                    {
-                        sum += matrix[xI, yI];
-                    }
+                Movement(evilRow, evilCol, isEvil, func);
 
-                    yI++;
-                    xI--;
-                }
+                var ivoRow = ivoS[0];
+                var ivoCol = ivoS[1];
+                isEvil = false;
+                func = i => i < matrix.GetLength(1);
+
+                sum = Movement(ivoRow, ivoCol, isEvil, func);
 
                 command = Console.ReadLine();
             }
 
-            Console.WriteLine(sum);
+            return sum;
+        }
 
+        public static bool RowColValidator(int row, int col) =>
+            row >= 0 && row < matrix.GetLength(0) && col >= 0 && col < matrix.GetLength(1);
+
+        public static int Movement(int initialRow, int initialCol, bool isEvil, Func<int, bool> func)
+        {
+            var sum = 0;
+            while (initialRow >= 0 && func(initialCol))
+            {
+                if (isEvil)
+                {
+                    if (RowColValidator(initialRow, initialCol))
+                    {
+                        matrix[initialRow--, initialCol--] = 0;
+                    }
+                    else
+                    {
+                        initialRow--;
+                        initialCol--;
+                    }
+                }
+                else
+                {
+                    if (RowColValidator(initialRow, initialCol))
+                    {
+                        sum += matrix[initialRow--, initialCol++];
+                    }
+                    else
+                    {
+
+                        initialRow--;
+                        initialCol++;
+                    }
+                }
+            }
+
+            return sum;
         }
     }
 }
