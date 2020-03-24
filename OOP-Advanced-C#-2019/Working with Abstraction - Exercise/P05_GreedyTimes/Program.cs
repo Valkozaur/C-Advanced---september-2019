@@ -9,6 +9,8 @@ namespace P05_GreedyTimes
         {
             long bagCapacity = long.Parse(Console.ReadLine());
             string[] safe = Console.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            Engine engine = new Engine();
+            engine.EngineStart(bagCapacity, safe);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32.SafeHandles;
+﻿using System.Linq;
+using System.Text;
 
 namespace P05_GreedyTimes
 {
@@ -6,17 +7,17 @@ namespace P05_GreedyTimes
 
     public class Bag
     {
-        private List<Gold> golds;
+        private List<Item> golds;
 
-        private List<Gem> gems;
+        private List<Item> gems;
 
-        private List<Cash> cash;
+        private List<Item> cash;
 
         public Bag()
         {
-            this.golds = new List<Gold>();
-            this.gems = new List<Gem>();
-            this.cash = new List<Cash>();
+            this.golds = new List<Item>();
+            this.gems = new List<Item>();
+            this.cash = new List<Item>();
         }
 
         public long TotalGoldAmount { get; private set; }
@@ -27,29 +28,53 @@ namespace P05_GreedyTimes
 
         public long TotalQuantity { get; private set; }
 
-        public List<Gold> GetGold => this.golds;
+        public List<Item> GetGold => this.golds;
 
-        public List<Gem> GetGems => this.gems;
+        public List<Item> GetGems => this.gems;
 
-        public List<Cash> GetCash => this.cash;
+        public List<Item> GetCash => this.cash;
 
         public void AddGold(string name, long quantity)
         {
-            this.golds.Add(new Gold(name, quantity));
+            var gold = golds.FirstOrDefault(g => g.Name == name);
+            if (gold != default)
+            {
+                gold.Quantity += quantity;
+                this.AddToTotalGoldAmount(quantity);
+                return;
+            }
+
+            this.golds.Add(new Item(name, quantity));
             this.AddToTotalGoldAmount(quantity);
             this.TotalQuantity += quantity;
         }
 
         public void AddGems(string name, long quantity)
         {
-            this.gems.Add(new Gem(name, quantity));
+            var gem = gems.FirstOrDefault(g => g.Name == name);
+            if (gem != default)
+            {
+                gem.Quantity += quantity;
+                this.AddToTotalGemAmount(quantity);
+                return;
+            }
+
+            this.gems.Add(new Item(name, quantity));
             this.AddToTotalGemAmount(quantity);
             this.TotalQuantity += quantity;
         }
 
         public void AddCash(string name, long quantity)
         {
-            this.cash.Add(new Cash(name, quantity));
+            var cash = this.cash.FirstOrDefault(c => c.Name == name);
+            if (cash != default)
+            {
+                cash.Quantity += quantity;
+                this.AddToTotalCashAmount(quantity);
+                return;
+            }
+
+            this.cash.Add(new Item(name, quantity));
             this.AddToTotalCashAmount(quantity);
             this.TotalQuantity += quantity;
         }
@@ -61,13 +86,44 @@ namespace P05_GreedyTimes
 
         private void AddToTotalCashAmount(long quantity)
         {
-            TotalGemAmount += quantity;
+            TotalCashAmount += quantity;
         }
 
 
         private void AddToTotalGemAmount(long quantity)
         {
-            TotalCashAmount += quantity;
+            TotalGemAmount += quantity;
+        }
+
+        public override string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+            if (golds.Any())
+            {
+                stringBuilder.AppendLine($"<Gold> ${TotalGoldAmount}");
+                foreach (var gold in golds.OrderByDescending(g => g.Name).ThenBy(g => g.Quantity))
+                {
+                    stringBuilder.AppendLine($"##{gold.Name} - {gold.Quantity}");
+                }
+                if (gems.Any())
+                {
+                    stringBuilder.AppendLine($"<Gem> ${TotalGemAmount}");
+                    foreach (var gem in gems.OrderByDescending(g => g.Name).ThenBy(g => g.Quantity))
+                    {
+                        stringBuilder.AppendLine($"##{gem.Name} - {gem.Quantity}");
+                    }
+                    if (cash.Any())
+                    {
+                        stringBuilder.AppendLine($"<Cash> ${TotalCashAmount}");
+                        foreach (var item in cash.OrderByDescending(c => c.Name).ThenBy(c => c.Quantity))
+                        {
+                            stringBuilder.AppendLine($"##{item.Name} - {item.Quantity}");
+                        }
+                    }
+                }
+            }
+
+            return stringBuilder.ToString().TrimEnd();
         }
     }
 }
