@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace _7._Knight_Game
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -29,7 +29,7 @@ namespace _7._Knight_Game
                         {
                             currentAttacks = FindNumberOfAttacks(chessBoard, row, col, ref killerRow, ref killerCol);
                         }
-
+                            
                         if (maxKnightAttacks < currentAttacks)
                         {
                             maxKnightAttacks = currentAttacks;
