@@ -3,13 +3,13 @@ using System.Text;
 
 namespace Animals
 {
-    public  abstract class Animal
+    public abstract class Animal
     {
         private const string AllowedGenders = "Male, Female";
-        
+
         private string name;
-		private int age;
-		private string gender;
+        private int age;
+        private string gender;
 
         protected Animal(string name, int age, string gender)
         {
@@ -19,10 +19,18 @@ namespace Animals
         }
 
         protected string Name
-		{
-			get { return name; }
-			set { name = value; }
-		}
+        {
+            get { return name; }
+            set
+            {
+                if (String.IsNullOrEmpty(value) || String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Invalid input!");
+                }
+
+                name = value;
+            }
+        }
 
         protected int Age
         {
@@ -43,6 +51,11 @@ namespace Animals
             get { return gender; }
             set
             {
+                if (String.IsNullOrEmpty(value) || String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Invalid input!");
+                }
+
                 if (!AllowedGenders.Contains(value))
                 {
                     throw new ArgumentException("Invalid input!");

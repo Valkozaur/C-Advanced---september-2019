@@ -1,8 +1,10 @@
-﻿namespace _1.Person2
+﻿using System.Text;
+
+namespace _1.Person2
 {
     using System;
 
-    public abstract class Person
+    public class Person
     {
         private string name;
         private int age;
@@ -13,10 +15,10 @@
             this.Age = age;
         }
 
-        public virtual string Name
+        public string Name
         {
             get => this.name;
-            protected set
+            set
             {
                 if (value.Length < 3 || string.IsNullOrWhiteSpace(value))
                 {
@@ -27,10 +29,10 @@
             }
         }
 
-        public virtual int Age
+         public virtual int Age
         {
             get => this.age;
-            protected set
+            set
             {
                 if (value < 0)
                 {
@@ -43,7 +45,8 @@
 
         public override string ToString()
         {
-            return $"Name: {this.Name}, Age: {this.Age}";
+            return $"Name: {this.Name}, Age: {this.Age}"; ;
         }
+
     }
 }

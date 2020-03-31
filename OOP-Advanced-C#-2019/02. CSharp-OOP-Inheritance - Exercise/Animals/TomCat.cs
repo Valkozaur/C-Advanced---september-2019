@@ -1,8 +1,8 @@
 ﻿namespace Animals
 {
-    public class TomCat : Cat
+    public class Tomcat : Cat
     {
-        public TomCat(string name, int age) 
+        public Tomcat(string name, int age) 
             : base(name, age, "Male")
         {
         }

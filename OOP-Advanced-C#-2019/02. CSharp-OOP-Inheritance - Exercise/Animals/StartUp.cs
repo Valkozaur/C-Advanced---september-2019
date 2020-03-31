@@ -11,41 +11,48 @@ namespace Animals
 
             while (true)
             {
-                var firstLineInput = Console.ReadLine();
+                var firstLineInput = Console.ReadLine()
+                    .ToLower();
 
-                if (firstLineInput == "Beast!")
+                if (firstLineInput == "beast!")
                 {
                     break;
                 }
 
                 var animalAttributes = Console.ReadLine()
-                    .Split();
-
-                var name = animalAttributes[0];
-                var age = int.Parse(animalAttributes[1]);
-                var gender = animalAttributes[2];
+                    .Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
                 try
                 {
-                    if (firstLineInput == "Cat")
+                    var name = animalAttributes[0];
+
+                    var ageIsValid = int.TryParse(animalAttributes[1], out int age);
+                    if (!ageIsValid)
+                    {
+                        throw new ArgumentException("Invalid input!");
+                    }
+
+                    var gender = animalAttributes[2];
+
+                    if (firstLineInput == "cat")
                     {
                         animals.Add(new Cat(name, age, gender));
                     }
-                    else if (firstLineInput == "Dog")
+                    else if (firstLineInput == "dog")
                     {
                         animals.Add(new Dog(name,age,gender));
                     }
-                    else if (firstLineInput == "Frog")
+                    else if (firstLineInput == "frog")
                     {     
                         animals.Add(new Frog(name,age,gender));
                     }
-                    else if (firstLineInput == "Kitten")    
+                    else if (firstLineInput == "kitten")    
                     {
                         animals.Add(new Kitten(name,age));
                     }
-                    else
+                    else if (firstLineInput == "tomcat")
                     {
-                        animals.Add(new TomCat(name,age));
+                        animals.Add(new Tomcat(name,age));
                     }
                 }
                 catch (Exception e)

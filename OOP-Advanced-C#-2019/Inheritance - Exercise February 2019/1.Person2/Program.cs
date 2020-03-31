@@ -7,7 +7,7 @@ namespace _1.Person2
         public static void Main()
         {
             var name = Console.ReadLine();
-            var age = int.Parse(Console.ReadLine());
+            var isAge = int.TryParse(Console.ReadLine(), out int age);
 
             try
             {

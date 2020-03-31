@@ -12,9 +12,9 @@
         public override int Age
         {
             get => base.Age;
-            protected set
+            set
             {
-                if (value >= 15)
+                if (value > 15)
                 {
                     Console.WriteLine("Child's age must be less than 15!");
                 }
