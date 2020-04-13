@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace P01.DefineAnInterfaceIPerson
+namespace P05.BirthdayCelebrations
 {
     class Program
     {
