@@ -2,62 +2,58 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Interfaces;
 
     public class Program
     {
         public static void Main()
         {
-            var citizens = new List<IBeing>();
+            var buyers = new List<Buyer>();
+
+            var numbersOfInput = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < numbersOfInput; i++)
+            {
+                var buyerInfo = Console.ReadLine()
+                    .Split();
+
+                if (buyerInfo.Length == 4)
+                {
+                    var name = buyerInfo[0];
+                    var age = int.Parse(buyerInfo[1]);
+                    var id = buyerInfo[2];
+                    var birthDate = buyerInfo[3];
+
+                    buyers.Add(new Human(name, age, id, birthDate)); 
+                }
+                else
+                {
+                    var name = buyerInfo[0];
+                    var age = int.Parse(buyerInfo[1]);
+                    var group = buyerInfo[2];
+
+                    buyers.Add(new Rebel(name, age, group));
+                }
+            }
 
             while (true)
             {
-                var input = Console.ReadLine();
-                if (input == "End")
+                var inputName = Console.ReadLine();
+                if (inputName == "End")
                 {
                     break;
                 }
 
-                var citizenInfo = input
-                    .Split(" ");
-
-                if (citizenInfo[0] == "Citizen")
+                var buyer = buyers.FirstOrDefault(x => x.Name == inputName);
+                if (buyer != default)
                 {
-                    var name = citizenInfo[1];
-                    var age = int.Parse(citizenInfo[2]);
-                    var id = citizenInfo[3];
-                    var birthDate = citizenInfo[4];
-
-
-                    var human = new Human(name, age, id, birthDate);
-                    citizens.Add(human);
-                }
-                ///else if (citizeninfo[0] == "robot")
-                //{
-                //    var model = citizeninfo[0];
-                //    var id = citizeninfo[1];
-
-                //    var robot = new robot(model, id);
-                //    citizens.add(robot);
-                //}
-                else if (citizenInfo[0] == "Pet")
-                {
-                    var name = citizenInfo[1];
-                    var birthDate = citizenInfo[2];
-                    var pet = new Pet(name, birthDate);
-                    citizens.Add(pet);
+                    buyer.BuyFood();
                 }
             }
 
-            var birthYear = Console.ReadLine();
-
-            foreach (var citizen in citizens)
-            {
-                if (citizen.BirthDate.EndsWith(birthYear))
-                {
-                    Console.WriteLine(citizen.BirthDate);
-                }
-            }
+            var totalFoodBought = buyers.Sum(x => x.Food);
+            Console.WriteLine(totalFoodBought);
         }
     }
 }

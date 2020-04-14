@@ -1,6 +1,6 @@
 ﻿namespace _4.BorderControl
 {
-    public class Robot : Citizen, ICitizen
+    public class Robot : ICitizen
     {
         public Robot(string model, string id)
         {
@@ -9,5 +9,7 @@
         }
 
         public string Model { get; set; }
+
+        public string Id { get; set; }
     }
 }

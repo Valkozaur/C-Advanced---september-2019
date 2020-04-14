@@ -1,25 +1,18 @@
-﻿namespace _4.BorderControl
+﻿
+namespace _4.BorderControl
 {
-    public class Rebel : IBuyer
+    using Interfaces;
+    public class Rebel : Buyer, IPerson
     {
-        private const int DefaultAmountOfFood = 5;
-
-        public Rebel(this)
+        public Rebel(string name, int age, string group)
         {
-
+            this.Name = name;
+            this.Age = age;
+            this.Group = group;
         }
 
-        string Name { get; set; }
-        
-        int Age { get; set; }
+        public string Group { get; set; }
 
-        string Group { get; set; }
-
-        public int Food { get; set; }
-
-        public void BuyFood()
-        {
-            this.Food += DefaultAmountOfFood;
-        }
+        protected override int DefaultFood => 5;
     }
 }

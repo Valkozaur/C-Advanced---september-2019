@@ -3,7 +3,7 @@
     using System;
     using Interfaces;
 
-    public class Pet : IBeing
+    public class Pet
     {
         public Pet(string name, string birthDate)
         {
