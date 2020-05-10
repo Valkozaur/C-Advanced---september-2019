@@ -21,6 +21,9 @@
             {
                 throw new ArgumentException(ExceptionMessages.InsufficientProcedureTime);
             }
+
+            robot.ProcedureTime -= procedureTime;
+            this.Robots.Add(robot);
         }
 
         public string History()

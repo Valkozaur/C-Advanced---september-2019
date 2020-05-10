@@ -50,6 +50,8 @@
                 {
                     throw new ArgumentException(ExceptionMessages.InvalidEnergy);
                 }
+
+                this.energy = value;
             }
         }
 

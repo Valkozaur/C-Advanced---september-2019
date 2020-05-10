@@ -11,7 +11,6 @@
     {
         public static void Main()
         {
-            var engine = new Engine();
             IWeaponRepository weaponRepository = new WeaponRepository();
 
             var inputManager = new InputManager();
@@ -20,7 +19,8 @@
             IWeaponFactory weaponFactory = new WeaponFactory();
             IGemFactory gemFactory = new GemFactory();
 
-            engine.Run(inputManager,outputManger, weaponRepository, weaponFactory, gemFactory);
+            var engine = new Engine(inputManager, outputManger, weaponRepository, weaponFactory, gemFactory);
+            engine.Run();
         }
     }
 }

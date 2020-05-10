@@ -1,10 +1,12 @@
-﻿namespace RobotService.Core
+﻿using System.Reflection;
+
+namespace RobotService.Core
 {
     using System;
 
-    using RobotService.IO;
+    using IO;
+    using Contracts;
     using RobotService.IO.Contracts;
-    using RobotService.Core.Contracts;
 
     public class Engine : IEngine
     {
@@ -16,7 +18,7 @@
         {
             this.writer = new Writer();
             this.reader = new Reader();
-            //this.controller = new Controller();
+            this.controller = new Controller();
         }
 
         public void Run()
@@ -102,7 +104,11 @@
 
                     writer.WriteLine(result);
                 }
-                catch (Exception ex)
+                catch(TargetInvocationException exception)
+                {
+                    writer.WriteLine(exception.InnerException.Message);
+                }
+                catch (ArgumentException ex)
                 {
                     writer.WriteLine(ex.Message);
                 }

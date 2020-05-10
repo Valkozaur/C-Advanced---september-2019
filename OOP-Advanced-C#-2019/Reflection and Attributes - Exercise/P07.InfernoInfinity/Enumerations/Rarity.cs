@@ -6,5 +6,6 @@
         Uncommon = 2,
         Rare = 3,
         Epic = 5,
+        Legendary = 10,
     }
 }

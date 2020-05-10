@@ -22,7 +22,7 @@ namespace P07.InfernoInfinity.Models.Commands
             var weaponName = this.arguments[0];
 
             var weapon = this.weaponDatabase.GetWeapon(weaponName);
-            Console.WriteLine(weapon);
+            outputManager.Print(weapon.ToString());
         }
     }
 }
